@@ -28,17 +28,22 @@ const BasicForm = (props) => {
     reset: emailReset,
   } = useFormInput(isEmail);
 
+  let formIsValid = false;
+  if (nameIsValid && lastnameIsValid && emailIsValid) {
+    formIsValid = true;
+  }
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
+    if (!formIsValid) {
+      return;
+    }
     console.log(firstname, lastname, email);
     nameReset();
     lastnameReset();
     emailReset();
   };
-  let formIsValid = false;
-  if (nameIsValid && lastnameIsValid && emailIsValid) {
-    formIsValid = true;
-  }
+
   const nameInputClass = nameInputHasError
     ? "form-control invalid"
     : "form-control";
